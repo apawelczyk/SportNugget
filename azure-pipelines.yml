@@ -1,4 +1,14 @@
 # ASP.NET Core (.NET Framework)
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure for Students(d7a8fd28-e8bb-499b-a67d-013ee52ccde5)'
+    appType: 'webApp'
+    appName: 'SportNugget-DEV'
+    deployToSlotOrASE: true
+    resourceGroupName: 'SportNugget-DEV'
+    slotName: 'production'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
