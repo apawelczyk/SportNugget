@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello Test 3!");
+app.MapGet("/", () => "Hello Test 4!");
 
 app.Run();
