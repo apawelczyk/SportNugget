@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime JS
+
+<h3>Test</h3>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var result = await JS.InvokeAsync<string>("testTest", "testing");
+    }
+}
