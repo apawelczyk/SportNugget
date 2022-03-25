@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Common", "Sport
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Tests", "SportNugget.Tests\SportNugget.Tests.csproj", "{80E88FD3-29CE-472A-8D6D-92C93316CB42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportNugget.Identity", "SportNugget.Identity\SportNugget.Identity.csproj", "{B0802769-903D-4C6D-A059-EF54A95BC8C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Identity", "SportNugget.Identity\SportNugget.Identity.csproj", "{B0802769-903D-4C6D-A059-EF54A95BC8C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

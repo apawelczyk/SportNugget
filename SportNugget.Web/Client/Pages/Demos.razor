@@ -1,19 +1,6 @@
 ﻿@page "/demos"
 @using SportNugget.Components.Demos
-@inject IJSRuntime JS
 
-<h3>Blah</h3>
-<Test></Test>
+<h3>@Test</h3>
+<Test TestData="@TestData"></Test>
 <Component1></Component1>
-
-@code {
-    protected override async Task OnInitializedAsync()
-    {
-
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        
-    }
-}
