@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace SportNugget.Web.Client.Shared
+namespace SportNugget.Pages.Shared
 {
     public class PageBase : ComponentBase
     {

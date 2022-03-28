@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
-using SportNugget.Maui.Data;
 
 namespace SportNugget.Maui;
 
@@ -17,7 +16,6 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddBlazorWebView();
-		builder.Services.AddSingleton<WeatherForecastService>();
 
 		return builder.Build();
 	}

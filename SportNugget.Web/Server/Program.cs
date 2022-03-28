@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.ResponseCompression;
 using SportNugget.Web.Server.Helpers.Services;
 
 var builder = WebApplication.CreateBuilder(args);

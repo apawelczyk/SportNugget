@@ -66,7 +66,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SportNugget.Components\SportNugget.Components.csproj" />
+	  <ProjectReference Include="..\SportNugget.Pages\SportNugget.Pages.csproj" />
 	</ItemGroup>
 
 </Project>
