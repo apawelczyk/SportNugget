@@ -11,10 +11,12 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.3" PrivateAssets="all" />
+    <PackageReference Include="Scrutor" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\SportNugget.Pages\SportNugget.Pages.csproj" />
+    <ProjectReference Include="..\..\SportNugget.Shared\SportNugget.Shared.csproj" />
   </ItemGroup>
 
 </Project>

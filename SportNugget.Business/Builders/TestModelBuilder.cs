@@ -23,5 +23,15 @@ namespace SportNugget.Business.Builders
 
             return _mapper.Map<TestModel>(dataModel);
         }
+
+        public List<TestModel> BuildMany(List<Test> dataModels)
+        {
+            if(dataModels?.Count > 0)
+            {
+                return dataModels.Select(x => Build(x)).ToList();
+            }
+
+            return new List<TestModel>();
+        }
     }
 }

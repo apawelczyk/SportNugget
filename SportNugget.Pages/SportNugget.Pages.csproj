@@ -23,6 +23,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SportNugget.Components\SportNugget.Components.csproj" />
+    <ProjectReference Include="..\SportNugget.Shared\SportNugget.Shared.csproj" />
+    <ProjectReference Include="..\SportNugget.ViewModels\SportNugget.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,5 +6,6 @@ namespace SportNugget.Business.Builders.Interfaces
     public interface ITestModelBuilder
     {
         TestModel Build(Test dataModel);
+        List<TestModel> BuildMany(List<Test> dataModels);
     }
 }

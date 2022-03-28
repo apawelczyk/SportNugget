@@ -17,6 +17,8 @@ public static class MauiProgram
 
 		builder.Services.AddBlazorWebView();
 
+
+
 		return builder.Build();
 	}
 }

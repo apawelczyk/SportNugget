@@ -68,7 +68,6 @@ namespace SportNugget.Web.Server.Helpers.Services
             {
                 o.FromCallingAssembly().AddClasses().AsMatchingInterface();
             });
-            //services.AddTransient<IDataAccessManager, DataAccessManager>();
             services.AddTransient<SportNugget.Logging.Interfaces.ILogger, SportNugget.Logging.Logger>();
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();

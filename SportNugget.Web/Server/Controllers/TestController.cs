@@ -52,6 +52,32 @@ namespace SportNugget.Web.Server.Controllers
         /// Test GET Method
         /// </summary>
         /// 
+        //[Authorize(Policy = "PublicSecure")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<List<TestModel>>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseWrapper<List<TestModel>>))]
+        [HttpGet("")]
+        public async Task<ActionResult<ResponseWrapper<TestModel>>> GetAll()
+        {
+            try
+            {
+                var serviceResult = await _testService.GetAllTests();
+                if (serviceResult != null)
+                {
+                    return _apiUtility.OkResponse(serviceResult);
+                }
+                return _apiUtility.StatusCodeResponse(StatusCodes.Status500InternalServerError, "Error retrieving TestModels from API. Service result returned null. Shouldn't be possible.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error retrieving TestModels from API.");
+                return _apiUtility.StatusCodeResponse(StatusCodes.Status500InternalServerError, "Error retrieving data.");
+            }
+        }
+
+        /// <summary>
+        /// Test GET Method
+        /// </summary>
+        /// 
         [HttpGet("Blah")]
         public async Task<int> GetBlah(int id)
         {
