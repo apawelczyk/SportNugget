@@ -46,7 +46,7 @@ namespace SportNugget.Business.Services
             catch(Exception e)
             {
                 _logger.LogError(e, "Error getting Test by id in service.");
-                responseWrapper.Exception = e;
+                responseWrapper.Exception = e.Message;
                 return responseWrapper;
             }
         }
@@ -73,7 +73,7 @@ namespace SportNugget.Business.Services
             catch (Exception e)
             {
                 _logger.LogError(e, "Error getting Test by id in service.");
-                responseWrapper.Exception = e;
+                responseWrapper.Exception = e.Message;
                 return responseWrapper;
             }
         }

@@ -6,7 +6,7 @@ using SportNugget.Data.Models;
 
 namespace SportNugget.Data.Contexts
 {
-    public partial class SportnuggetContext : IdentityDbContext
+    public partial class SportnuggetContext : DbContext//IdentityDbContext
     {
         public SportnuggetContext()
         {

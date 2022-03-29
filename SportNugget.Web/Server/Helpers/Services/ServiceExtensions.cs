@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using SportNugget.Common.API.Interfaces;
 using SportNugget.Common.API;
+using SportNugget.Web.Server.Utility.Interfaces;
+using SportNugget.Web.Server.Utility.API;
 
 namespace SportNugget.Web.Server.Helpers.Services
 {
@@ -50,8 +52,8 @@ namespace SportNugget.Web.Server.Helpers.Services
                     opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 }).EnableSensitiveDataLogging());
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<SportnuggetContext>();
+            //services.AddDefaultIdentity<IdentityUser>()
+            //    .AddEntityFrameworkStores<SportnuggetContext>();
         }
 
         public static void ConfigureHTTPClient(this IServiceCollection services, IConfiguration config)
@@ -72,6 +74,7 @@ namespace SportNugget.Web.Server.Helpers.Services
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
             services.AddTransient<ITestModelBuilder, TestModelBuilder>();
+            services.AddTransient<IAPIUtility, APIUtility>();
         }
 
         public static void ConfigureAutomapper(this IServiceCollection services)
@@ -87,31 +90,31 @@ namespace SportNugget.Web.Server.Helpers.Services
 
         public static void ConfigureIdentityServer(this IServiceCollection services)
         {
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.Authority = "https://localhost:44363";
-                o.Audience = "SportNugget.WebAPI";
-                o.RequireHttpsMetadata = false;
-                o.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = "https://localhost:44363",
-                    ValidAudience = "SportNugget.WebAPI",
-                    //IssuerSigningKey = new SymmetricSecurityKey("sportnugget_client_id")
-                };
-            });
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(o =>
+            //{
+            //    o.Authority = "https://localhost:44363";
+            //    o.Audience = "SportNugget.WebAPI";
+            //    o.RequireHttpsMetadata = false;
+            //    o.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuer = true,
+            //        ValidateAudience = true,
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = true,
+            //        ValidIssuer = "https://localhost:44363",
+            //        ValidAudience = "SportNugget.WebAPI",
+            //        //IssuerSigningKey = new SymmetricSecurityKey("sportnugget_client_id")
+            //    };
+            //});
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "secret_client_id"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "secret_client_id"));
+            //});
         }
     }
 }

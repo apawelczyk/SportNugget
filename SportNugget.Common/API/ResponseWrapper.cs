@@ -4,6 +4,6 @@
     {
         public T Data { get; set; }
         public bool IsSuccessful { get; set; }
-        public Exception Exception { get; set; }
+        public string Exception { get; set; }
     }
 }

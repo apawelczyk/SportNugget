@@ -12,13 +12,13 @@ namespace SportNugget.Web.Server.Controllers
     public class TestController : ControllerBase
     {
         private readonly ITestService _testService;
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
         private readonly IAPIUtility _apiUtility;
 
-        public TestController(ITestService testService, ILogger logger, IAPIUtility apiUtility)
+        public TestController(ITestService testService, /*ILogger logger,*/ IAPIUtility apiUtility)
         {
             _testService = testService;
-            _logger = logger;
+            //_logger = logger;
             _apiUtility = apiUtility;
         }
 
@@ -27,8 +27,8 @@ namespace SportNugget.Web.Server.Controllers
         /// </summary>
         /// 
         //[Authorize(Policy = "PublicSecure")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<TestModel>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseWrapper<TestModel>))]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TestModel))]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(TestModel))]
         [HttpGet("{id}")]
         public async Task<ActionResult<ResponseWrapper<TestModel>>> Get(int id)
         {
@@ -43,7 +43,7 @@ namespace SportNugget.Web.Server.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error retrieving TestModel from API.");
+                //_logger.LogError(e, "Error retrieving TestModel from API.");
                 return _apiUtility.StatusCodeResponse(StatusCodes.Status500InternalServerError, "Error retrieving data.");
             }
         }
@@ -53,10 +53,10 @@ namespace SportNugget.Web.Server.Controllers
         /// </summary>
         /// 
         //[Authorize(Policy = "PublicSecure")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<List<TestModel>>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ResponseWrapper<List<TestModel>>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<IEnumerable<TestModel>>))]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<TestModel>))]
         [HttpGet("")]
-        public async Task<ActionResult<ResponseWrapper<TestModel>>> GetAll()
+        public async Task<ActionResult<ResponseWrapper<IEnumerable<TestModel>>>> GetAll()
         {
             try
             {
@@ -69,19 +69,9 @@ namespace SportNugget.Web.Server.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error retrieving TestModels from API.");
+                //_logger.LogError(e, "Error retrieving TestModels from API.");
                 return _apiUtility.StatusCodeResponse(StatusCodes.Status500InternalServerError, "Error retrieving data.");
             }
-        }
-
-        /// <summary>
-        /// Test GET Method
-        /// </summary>
-        /// 
-        [HttpGet("Blah")]
-        public async Task<int> GetBlah(int id)
-        {
-            return 5;
         }
     }
 }
