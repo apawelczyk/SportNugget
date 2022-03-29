@@ -2,5 +2,17 @@
 @using SportNugget.Components.Demos
 
 <h3>@Test</h3>
-<Test TestData="@TestData"></Test>
-<Component1></Component1>
+<Test Items="@TestData" Context="tdc">
+    <TableHeader>
+        <th>Id</th>
+        <th>Name</th>
+    </TableHeader>
+    <RowTemplate>
+        <td>@tdc.Id</td>
+        <td>@tdc.Name</td>
+    </RowTemplate>
+    <FooterContent>
+        <h2>Footer</h2>
+        <Component1></Component1>
+    </FooterContent>
+</Test>

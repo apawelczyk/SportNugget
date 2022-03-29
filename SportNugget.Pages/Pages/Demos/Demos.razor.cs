@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SportNugget.Shared.Services.Interfaces;
 using SportNugget.Shared.ViewModelBuilders.Interfaces;
+using SportNugget.ViewModels.Demos;
 
 namespace SportNugget.Pages.Pages.Demos
 {
@@ -15,18 +16,17 @@ namespace SportNugget.Pages.Pages.Demos
 
         #region Local Variables
         public string Test { get; set; } = "Test";
-        public List<string> TestData { get; set; } = new List<string>();
+        public List<TestViewModel> TestData { get; set; } = new List<TestViewModel>();
         #endregion
 
         #region Lifecycles
         protected override async Task OnInitializedAsync()
         {
             Test = "Test Demo";
-            TestData = new List<string> { "Test Web 1", "Test Web 2" };
 
             var testData = await TestService.GetTests();
             var builtViewModels = TestViewModelBuilder.BuildMany(testData);
-            TestData = builtViewModels?.Select(x => x.Name)?.ToList() ?? new List<string>();
+            TestData = builtViewModels;
         }
         #endregion
     }

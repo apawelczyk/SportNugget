@@ -74,7 +74,6 @@ namespace SportNugget.Web.Server.Helpers.Services
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<IRepositoryWrapper, RepositoryWrapper>();
             services.AddTransient<ITestModelBuilder, TestModelBuilder>();
-            services.AddTransient<IAPIUtility, APIUtility>();
         }
 
         public static void ConfigureAutomapper(this IServiceCollection services)
@@ -84,7 +83,6 @@ namespace SportNugget.Web.Server.Helpers.Services
 
         public static void ConfigureSwagger(this IServiceCollection services)
         {
-            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
         }
 

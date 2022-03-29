@@ -27,8 +27,7 @@ namespace SportNugget.Web.Server.Controllers
         /// </summary>
         /// 
         //[Authorize(Policy = "PublicSecure")]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TestModel))]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(TestModel))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<TestModel>))]
         [HttpGet("{id}")]
         public async Task<ActionResult<ResponseWrapper<TestModel>>> Get(int id)
         {
@@ -54,7 +53,6 @@ namespace SportNugget.Web.Server.Controllers
         /// 
         //[Authorize(Policy = "PublicSecure")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<IEnumerable<TestModel>>))]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(IEnumerable<TestModel>))]
         [HttpGet("")]
         public async Task<ActionResult<ResponseWrapper<IEnumerable<TestModel>>>> GetAll()
         {

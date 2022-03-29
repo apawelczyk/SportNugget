@@ -1,5 +1,30 @@
-﻿<h3>Test</h3>
+﻿@typeparam T
 
-@foreach(var data in TestData){
-    <h5>Data:</h5><h3>@data</h3>
-}
+<h3>Test 
+    @if (IsLoading)
+    {
+        <h3>is loading...</h3>
+    }
+</h3>
+
+<table class="table">
+    <thead>
+        <tr>@TableHeader</tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Items)
+        {
+            if (RowTemplate is not null)
+            {
+                <tr>@RowTemplate(item)</tr>
+            }
+            else
+            {
+                <tr>@item</tr>
+            }
+        }
+    </tbody>
+    <tfoot>
+        @FooterContent
+    </tfoot>
+</table>
