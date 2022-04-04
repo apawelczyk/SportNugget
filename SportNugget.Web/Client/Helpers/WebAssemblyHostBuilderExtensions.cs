@@ -10,6 +10,7 @@ using SportNugget.Shared.ViewModelBuilders.Interfaces;
 using SportNugget.Shared.ViewModelBuilders;
 using AutoMapper;
 using SportNugget.Shared.MappingConfigurations;
+using Radzen;
 
 namespace SportNugget.Web.Client.Helpers
 {
@@ -29,10 +30,10 @@ namespace SportNugget.Web.Client.Helpers
 
         public static void InitializeRadzen(this WebAssemblyHostBuilder builder)
         {
-        //    builder.Services.AddScoped<Radzen.DialogService>();
-        //    builder.Services.AddScoped<NotificationService>();
-        //    builder.Services.AddScoped<TooltipService>();
-        //    builder.Services.AddScoped<ContextMenuService>();
+            builder.Services.AddScoped<DialogService>();
+            builder.Services.AddScoped<NotificationService>();
+            builder.Services.AddScoped<TooltipService>();
+            builder.Services.AddScoped<ContextMenuService>();
         }
 
         public static void InitializeMudBlazor(this WebAssemblyHostBuilder builder)

@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SportNugget.Pages.Shared;
 using SportNugget.Shared.Services.Interfaces;
 using SportNugget.Shared.ViewModelBuilders.Interfaces;
 using SportNugget.ViewModels.Demos;
 
 namespace SportNugget.Pages.Pages.Demos
 {
-    public partial class Demos
+    public partial class Demos : PageBase
     {
         #region Injected Services
         [Inject]
         private ITestService TestService { get; set; }
         [Inject]
         private ITestViewModelBuilder TestViewModelBuilder { get; set; }
+        #endregion
+
+        #region Parameters
         #endregion
 
         #region Local Variables
@@ -22,11 +26,19 @@ namespace SportNugget.Pages.Pages.Demos
         #region Lifecycles
         protected override async Task OnInitializedAsync()
         {
-            Test = "Test Demo";
+            try
+            {
+                Test = "Test Demo";
 
-            var testData = await TestService.GetTests();
-            var builtViewModels = TestViewModelBuilder.BuildMany(testData);
-            TestData = builtViewModels;
+                var testData = await TestService.GetTests();
+                var builtViewModels = TestViewModelBuilder.BuildMany(testData);
+                TestData = builtViewModels;
+                throw new Exception();
+            }
+            catch(Exception e)
+            {
+                Error?.ProcessError(e);
+            }
         }
         #endregion
     }

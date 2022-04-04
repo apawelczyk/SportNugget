@@ -28,9 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Tests", "SportN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Identity", "SportNugget.Identity\SportNugget.Identity.csproj", "{B0802769-903D-4C6D-A059-EF54A95BC8C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportNugget.Pages", "SportNugget.Pages\SportNugget.Pages.csproj", "{99F1B534-DF82-4F1F-9E4F-30BEE90AD189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Pages", "SportNugget.Pages\SportNugget.Pages.csproj", "{99F1B534-DF82-4F1F-9E4F-30BEE90AD189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportNugget.Shared", "SportNugget.Shared\SportNugget.Shared.csproj", "{E923EFFA-C381-45E0-B895-C5F2D463EBB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportNugget.Shared", "SportNugget.Shared\SportNugget.Shared.csproj", "{E923EFFA-C381-45E0-B895-C5F2D463EBB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
