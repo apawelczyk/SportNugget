@@ -13,6 +13,8 @@ using SportNugget.Shared.MappingConfigurations;
 using Radzen;
 using Serilog.Core;
 using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.Splunk;
 
 namespace SportNugget.Web.Client.Helpers
 {
@@ -51,7 +53,6 @@ namespace SportNugget.Web.Client.Helpers
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(levelSwitch)
                 .Enrich.WithProperty("InstanceId", Guid.NewGuid().ToString("n"))
-                //.WriteTo.EventCollector("https://localhost:8088/services/collector", "c3ea2d6f-bb2a-4b1a-8c38-2400d7852114") // Sends logs to Splunk
                 .WriteTo.BrowserHttp(endpointUrl: $"{builder.Configuration[Settings.ServerAPIBaseUrl]}ingest", controlLevelSwitch: levelSwitch) // Sends logs to Web.Server
                 .WriteTo.BrowserConsole() // Sends log to Browser console
                 .CreateLogger();

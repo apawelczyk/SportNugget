@@ -121,7 +121,8 @@ namespace SportNugget.Web.Server.Helpers.Services
             // TODO: Move to Config File
             builder.Logging.SetMinimumLevel(LogLevel.Debug);
             builder.Host.UseSerilog((ctx, lc) => lc
-                .WriteTo.Console());
+                .WriteTo.Console()
+                .WriteTo.EventCollector("http://localhost:8088/services/collector", "e4829192-bd42-41b9-baa5-f3f111f54d33")); // Sends logs to Splunk);
         }
     }
 }
