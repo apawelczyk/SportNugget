@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SportNugget.Logging.Interfaces;
 using SportNugget.Pages.Shared;
 using SportNugget.Shared.Services.Interfaces;
 using SportNugget.Shared.ViewModelBuilders.Interfaces;
@@ -13,6 +14,8 @@ namespace SportNugget.Pages.Pages.Demos
         private ITestService TestService { get; set; }
         [Inject]
         private ITestViewModelBuilder TestViewModelBuilder { get; set; }
+        [Inject]
+        public ILogger Logger { get; set; }
         #endregion
 
         #region Parameters
@@ -28,11 +31,13 @@ namespace SportNugget.Pages.Pages.Demos
         {
             try
             {
+                Logger.LogInfo("Demos.razor.cs OnInitializedAsync!");
                 Test = "Test Demo";
 
                 var testData = await TestService.GetTests();
                 var builtViewModels = TestViewModelBuilder.BuildMany(testData);
                 TestData = builtViewModels;
+                
                 throw new Exception();
             }
             catch(Exception e)

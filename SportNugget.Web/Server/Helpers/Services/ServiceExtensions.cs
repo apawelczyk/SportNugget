@@ -118,10 +118,10 @@ namespace SportNugget.Web.Server.Helpers.Services
 
         public static void ConfigureLogging(this WebApplicationBuilder builder)
         {
+            // TODO: Move to Config File
             builder.Logging.SetMinimumLevel(LogLevel.Debug);
             builder.Host.UseSerilog((ctx, lc) => lc
-                .WriteTo.Console()
-                .WriteTo.BrowserConsole());
+                .WriteTo.Console());
         }
     }
 }

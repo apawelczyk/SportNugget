@@ -59,7 +59,7 @@ namespace SportNugget.Web.Server.Controllers
         {
             try
             {
-                Log.Information("Test /api/Test Log!");
+                _logger.LogInfo("Test SportNugget.Logger!");
                 var serviceResult = await _testService.GetAllTests();
                 if (serviceResult != null)
                 {
