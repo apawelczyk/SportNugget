@@ -1,3 +1,4 @@
+using Serilog;
 using SportNugget.Web.Server.Helpers.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,10 @@ builder.Services.ConfigureAutomapper();
 builder.Services.ConfigureSwagger();
 #endregion
 
+#region Logging
+builder.ConfigureLogging();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -56,8 +61,10 @@ app.UseHttpsRedirection();
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseSerilogIngestion();
+app.UseSerilogRequestLogging();
 
+app.UseRouting();
 
 app.MapRazorPages();
 app.MapControllers();

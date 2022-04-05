@@ -18,6 +18,7 @@ using SportNugget.Common.API.Interfaces;
 using SportNugget.Common.API;
 using SportNugget.Web.Server.Utility.Interfaces;
 using SportNugget.Web.Server.Utility.API;
+using Serilog;
 
 namespace SportNugget.Web.Server.Helpers.Services
 {
@@ -113,6 +114,14 @@ namespace SportNugget.Web.Server.Helpers.Services
             //{
             //    options.AddPolicy("PublicSecure", policy => policy.RequireClaim("client_id", "secret_client_id"));
             //});
+        }
+
+        public static void ConfigureLogging(this WebApplicationBuilder builder)
+        {
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+            builder.Host.UseSerilog((ctx, lc) => lc
+                .WriteTo.Console()
+                .WriteTo.BrowserConsole());
         }
     }
 }

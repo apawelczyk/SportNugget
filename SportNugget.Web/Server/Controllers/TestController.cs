@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using SportNugget.Business.Services.Interfaces;
 using SportNugget.BusinessModels.Test;
 using SportNugget.Common.API;
@@ -12,13 +13,13 @@ namespace SportNugget.Web.Server.Controllers
     public class TestController : ControllerBase
     {
         private readonly ITestService _testService;
-        //private readonly ILogger _logger;
+        private readonly Logging.Interfaces.ILogger _logger;
         private readonly IAPIUtility _apiUtility;
 
-        public TestController(ITestService testService, /*ILogger logger,*/ IAPIUtility apiUtility)
+        public TestController(ITestService testService, Logging.Interfaces.ILogger logger, IAPIUtility apiUtility)
         {
             _testService = testService;
-            //_logger = logger;
+            _logger = logger;
             _apiUtility = apiUtility;
         }
 
@@ -58,6 +59,7 @@ namespace SportNugget.Web.Server.Controllers
         {
             try
             {
+                Log.Information("Test /api/Test Log!");
                 var serviceResult = await _testService.GetAllTests();
                 if (serviceResult != null)
                 {
