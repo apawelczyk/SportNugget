@@ -17,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Login\" />
-    <Folder Include="Home\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
