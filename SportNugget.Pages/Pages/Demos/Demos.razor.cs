@@ -24,6 +24,7 @@ namespace SportNugget.Pages.Pages.Demos
         #region Local Variables
         public string Test { get; set; } = "Test";
         public List<TestViewModel> TestData { get; set; } = new List<TestViewModel>();
+        public bool IsLoading { get; set; } = true;
         #endregion
 
         #region Lifecycles
@@ -34,16 +35,27 @@ namespace SportNugget.Pages.Pages.Demos
                 Logger.LogInfo("Demos.razor.cs OnInitializedAsync!");
                 Test = "Test Demo";
 
-                var testData = await TestService.GetTests();
-                var builtViewModels = TestViewModelBuilder.BuildMany(testData);
-                TestData = builtViewModels;
-                
+                var testDataTask = LoadTestData();
+
+                await Task.WhenAll(testDataTask);
+
+                IsLoading = false;
+                StateHasChanged();
                 throw new Exception();
             }
             catch(Exception e)
             {
                 Error?.ProcessError(e);
             }
+        }
+        #endregion
+
+        #region Tasks
+        private async Task LoadTestData()
+        {
+            var testData = await TestService.GetTests();
+            var builtViewModels = TestViewModelBuilder.BuildMany(testData);
+            TestData = builtViewModels;
         }
         #endregion
     }

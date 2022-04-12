@@ -13,12 +13,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.3" />
+    <PackageReference Include="Radzen.Blazor" Version="3.17.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Login\" />
     <Folder Include="Home\" />
-    <Folder Include="Shared\" />
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
