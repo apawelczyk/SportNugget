@@ -3,7 +3,7 @@
 @using SportNugget.Components.Shared
 @inherits PageBase
 
-<h3>@Test</h3>
+<h3>@TestText</h3>
 <Loader IsLoading="IsLoading">
     <Test Items="@TestData" Context="tdc">
         <TableHeader>
@@ -20,3 +20,10 @@
         </FooterContent>
     </Test>
 </Loader>
+<br />
+<div>
+    <h3>Session: </h3>
+    <h3>Test State: @TestState.TestText</h3>
+    <input @bind="TestText"/>
+    <button @onclick="OnTestStateChangeButtonClick">Change</button>
+</div>

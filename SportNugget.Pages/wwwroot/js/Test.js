@@ -1,3 +1,3 @@
 ﻿function testTest(message) {
-    return alert("this is a test.");
+    return alert("this is a js page test.");
 }

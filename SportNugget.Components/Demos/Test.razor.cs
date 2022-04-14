@@ -24,12 +24,12 @@ namespace SportNugget.Components.Demos
 
         protected override async Task OnInitializedAsync()
         {
-
+            var result = await JS.InvokeAsync<string>("testTest", "testing");
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            var result = await JS.InvokeAsync<string>("testTest", "testing");
+
         }
     }
 }

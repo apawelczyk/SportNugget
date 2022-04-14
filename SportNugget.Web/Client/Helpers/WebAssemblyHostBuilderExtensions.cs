@@ -15,6 +15,8 @@ using Serilog.Core;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.Splunk;
+using SportNugget.Shared.State.Demos.Interfaces;
+using SportNugget.Shared.State.Demos;
 
 namespace SportNugget.Web.Client.Helpers
 {
@@ -30,6 +32,7 @@ namespace SportNugget.Web.Client.Helpers
             builder.Services.AddTransient<Logging.Interfaces.ILogger, SportNugget.Logging.Logger>();
             builder.Services.AddTransient<ITestService, TestService>();
             builder.Services.AddTransient<ITestViewModelBuilder, TestViewModelBuilder>();
+            builder.Services.AddSingleton<ITestState, TestState>();
         }
 
         public static void InitializeRadzen(this WebAssemblyHostBuilder builder)

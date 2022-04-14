@@ -2,6 +2,7 @@
 using SportNugget.Logging.Interfaces;
 using SportNugget.Pages.Shared;
 using SportNugget.Shared.Services.Interfaces;
+using SportNugget.Shared.State.Demos.Interfaces;
 using SportNugget.Shared.ViewModelBuilders.Interfaces;
 using SportNugget.ViewModels.Demos;
 
@@ -16,13 +17,15 @@ namespace SportNugget.Pages.Pages.Demos
         private ITestViewModelBuilder TestViewModelBuilder { get; set; }
         [Inject]
         public ILogger Logger { get; set; }
+        [Inject]
+        public ITestState TestState { get; set; }
         #endregion
 
         #region Parameters
         #endregion
 
         #region Local Variables
-        public string Test { get; set; } = "Test";
+        public string TestText { get; set; }
         public List<TestViewModel> TestData { get; set; } = new List<TestViewModel>();
         public bool IsLoading { get; set; } = true;
         #endregion
@@ -33,7 +36,7 @@ namespace SportNugget.Pages.Pages.Demos
             try
             {
                 Logger.LogInfo("Demos.razor.cs OnInitializedAsync!");
-                Test = "Test Demo";
+                TestText = TestState.TestText;
 
                 var testDataTask = LoadTestData();
 
@@ -56,6 +59,14 @@ namespace SportNugget.Pages.Pages.Demos
             var testData = await TestService.GetTests();
             var builtViewModels = TestViewModelBuilder.BuildMany(testData);
             TestData = builtViewModels;
+        }
+        #endregion
+
+        #region Events
+        public void OnTestStateChangeButtonClick()
+        {
+            TestState.TestText = TestText;
+            StateHasChanged();
         }
         #endregion
     }
