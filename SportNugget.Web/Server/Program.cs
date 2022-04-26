@@ -66,6 +66,11 @@ app.UseSerilogRequestLogging();
 
 app.UseRouting();
 
+app.UseCors("CorsPolicy");
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");

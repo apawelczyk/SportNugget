@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SportNugget.Business.Services.Interfaces;
 using SportNugget.BusinessModels.Test;
@@ -52,7 +53,7 @@ namespace SportNugget.Web.Server.Controllers
         /// Test GET Method
         /// </summary>
         /// 
-        //[Authorize(Policy = "PublicSecure")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ResponseWrapper<IEnumerable<TestModel>>))]
         [HttpGet("")]
         public async Task<ActionResult<ResponseWrapper<IEnumerable<TestModel>>>> GetAll()

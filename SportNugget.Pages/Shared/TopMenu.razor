@@ -53,3 +53,16 @@
         <RadzenProfileMenuItem Text="Notification" Path="notification" Icon="announcement"></RadzenProfileMenuItem>
     </ChildContent>
 </RadzenProfileMenu>
+
+<AuthorizeView>
+    <Authorized>
+        <h3>Hello, Person</h3>
+        <button class="nav-link btn btn-link" @onclick="OnLogOut">Log out</button>
+    </Authorized>
+    <NotAuthorized>
+        <h3>Authentication Failure!</h3>
+        <p>You're not signed in.</p>
+        <a href="Register">Register</a>
+        <a href="Login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>

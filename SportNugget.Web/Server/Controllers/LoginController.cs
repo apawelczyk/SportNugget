@@ -15,11 +15,11 @@ namespace SportNugget.Web.Server.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly Logging.Interfaces.ILogger _logger;
         private readonly IAPIUtility _apiUtility;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public LoginController(ILogger logger, IAPIUtility apiUtility, SignInManager<IdentityUser> signInManager)
+        public LoginController(Logging.Interfaces.ILogger logger, IAPIUtility apiUtility, SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
             _apiUtility = apiUtility;
@@ -34,25 +34,25 @@ namespace SportNugget.Web.Server.Controllers
         {
             try
             {
-                var signInResult = await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false);
+                //var signInResult = await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false);
 
-                if (!signInResult.Succeeded)
-                {
-                    return _apiUtility.StatusCodeResponse(StatusCodes.Status401Unauthorized, "Username and password are invalid.");
-                }
+                //if (!signInResult.Succeeded)
+                //{
+                //    return _apiUtility.StatusCodeResponse(StatusCodes.Status401Unauthorized, "Username and password are invalid.");
+                //}
 
                 var claims = new[]
                 {
                     new Claim(ClaimTypes.Name, loginModel.Username)
                 };
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("sportnugget_client_id"));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ServerSecretKey12345"));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var expiry = DateTime.Now.AddDays(Convert.ToInt32(1));
 
                 var token = new JwtSecurityToken(
                     "https://localhost:44363",
-                    "SportNugget.WebAPI",
+                    "SportNugget.Web.API",
                     claims,
                     expires: expiry,
                     signingCredentials: creds
