@@ -8,7 +8,7 @@ builder.Services.InitializeIdentityServer(builder.Configuration);
 
 var app = builder.Build();
 
-//app.MigrateDatabase();
+app.MigrateDatabase();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
