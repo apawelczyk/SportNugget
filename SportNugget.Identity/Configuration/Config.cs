@@ -39,13 +39,13 @@ namespace SportNugget.Identity.Configuration
                 {
                     ClientName = "SportNugget Web Assembly App",
                     ClientId = "579a56d4-cb3c-489c-af75-5f0cfeedb660",
-                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+                    AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets =
                     {
                         new Secret("secret-key-11111".Sha256())
                     },
                     RequirePkce = true,
-                    RequireClientSecret = true,
+                    RequireClientSecret = false,
                     AllowedCorsOrigins = { "https://localhost:5001" },
                     AllowedScopes =
                     {
@@ -53,8 +53,9 @@ namespace SportNugget.Identity.Configuration
                         IdentityServerConstants.StandardScopes.Profile,
                         "web-api-scope"
                     },
-                    RedirectUris = { "https://www.google.com/authentication/login-callback" },
-                    PostLogoutRedirectUris = { "https://www.bing.com/authentication/logout-callback" }
+                    RedirectUris = { "https://localhost:5001/authentication/login-callback" },
+                    PostLogoutRedirectUris = { "https://localhost:5001/authentication/logout-callback" },
+                    Enabled = true
                 },
                 // SportNugget Web API Client
                 new Client
@@ -69,7 +70,8 @@ namespace SportNugget.Identity.Configuration
                     AllowedScopes = 
                     { 
                         IdentityServerConstants.StandardScopes.OpenId, "web-api-scope"
-                    }
+                    },
+                    Enabled = true
                 }
             };
         }

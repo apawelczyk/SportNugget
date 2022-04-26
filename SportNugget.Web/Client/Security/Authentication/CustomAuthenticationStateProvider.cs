@@ -23,7 +23,7 @@ namespace SportNugget.Web.Client.Security.Authentication
 
             var identity = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, "mrfibuli"),
+                new Claim(ClaimTypes.Name, "fakeUser"),
             }, "Fake authentication type");
 
             var user = new ClaimsPrincipal(identity);

@@ -76,18 +76,18 @@ namespace SportNugget.Web.Client.Helpers
             builder.Services.AddHttpClient(configuration[Settings.ServerAPIClientName], client =>
             {
                 client.BaseAddress = new Uri(configuration[Settings.ServerAPIBaseUrl]);
-            })
-            .AddHttpMessageHandler(sp =>
-            {
-                var handler = sp.GetService<AuthorizationMessageHandler>()
-                    .ConfigureHandler(
-                        authorizedUrls: new[] { "https://localhost:7013" },
-                        scopes: new[] { "api-scope" });
-                return handler;
             });
+            //.AddHttpMessageHandler(sp =>
+            //{
+            //    var handler = sp.GetService<AuthorizationMessageHandler>()
+            //        .ConfigureHandler(
+            //            authorizedUrls: new[] { "https://localhost:7013" },
+            //            scopes: new[] { "api-scope" });
+            //    return handler;
+            //});
             // Allows CORS with Web API
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(configuration[Settings.ServerAPIClientName]));
-            builder.Services.AddApiAuthorization();
+            //builder.Services.AddApiAuthorization();
             // Configuration for DataAccessManager for which client to use. Base URL is setup according to above.
             builder.Services.AddTransient<IRestClientConfig, RestClientConfig>();
         }
@@ -95,7 +95,7 @@ namespace SportNugget.Web.Client.Helpers
         public static void InitializeAuthentication(this WebAssemblyHostBuilder builder)
         {
             #region
-            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            //builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddOptions();
             builder.Services.AddAuthorizationCore();
             #endregion
@@ -105,7 +105,7 @@ namespace SportNugget.Web.Client.Helpers
             {
                 opt.ProviderOptions.Authority = "https://localhost:7013/";
                 opt.ProviderOptions.ClientId = "579a56d4-cb3c-489c-af75-5f0cfeedb660";
-                opt.ProviderOptions.ResponseType = "code id_token";
+                opt.ProviderOptions.ResponseType = "code";
                 opt.ProviderOptions.DefaultScopes.Add("openid");
                 opt.ProviderOptions.DefaultScopes.Add("profile");
                 opt.ProviderOptions.DefaultScopes.Add("web-api-scope");
