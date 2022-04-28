@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using SportNugget.Common.API.Interfaces;
 using SportNugget.Common.Configuration.Interfaces;
 using SportNugget.Logging.Interfaces;
@@ -6,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 
 namespace SportNugget.Common.API
 {

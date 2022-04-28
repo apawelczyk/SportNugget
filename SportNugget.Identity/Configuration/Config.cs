@@ -69,7 +69,8 @@ namespace SportNugget.Identity.Configuration
                     },
                     AllowedScopes = 
                     { 
-                        IdentityServerConstants.StandardScopes.OpenId, "web-api-scope"
+                        IdentityServerConstants.StandardScopes.OpenId, 
+                        "web-api-scope"
                     },
                     Enabled = true
                 }

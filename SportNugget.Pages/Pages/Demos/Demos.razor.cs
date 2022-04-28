@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using SportNugget.Logging.Interfaces;
 using SportNugget.Pages.Shared;
 using SportNugget.Shared.Services.Interfaces;
@@ -19,6 +20,8 @@ namespace SportNugget.Pages.Pages.Demos
         public ILogger Logger { get; set; }
         [Inject]
         public ITestState TestState { get; set; }
+        [Inject]
+        public IAccessTokenProvider TokenProvider { get; set; }
         #endregion
 
         #region Parameters
@@ -35,7 +38,15 @@ namespace SportNugget.Pages.Pages.Demos
         {
             try
             {
-                Logger.LogInfo("Demos.razor.cs OnInitializedAsync!");
+                var accessTokenResult = await TokenProvider.RequestAccessToken();
+                var bearerToken = string.Empty;
+
+                if (accessTokenResult.TryGetToken(out var token))
+                {
+                    bearerToken = token.Value;
+                }
+
+                Logger.LogInfo("Demos.razor.cs OnInitializedAsync!" + $" Token: {bearerToken}");
                 TestText = TestState.TestText;
 
                 var testDataTask = LoadTestData();

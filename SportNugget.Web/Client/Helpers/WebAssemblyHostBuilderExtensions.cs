@@ -22,6 +22,8 @@ using SportNugget.Web.Client.Security.Authentication;
 using SportNugget.Shared.State.Auth.Interfaces;
 using SportNugget.Shared.State.Auth;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace SportNugget.Web.Client.Helpers
 {
@@ -71,20 +73,23 @@ namespace SportNugget.Web.Client.Helpers
         {
             var configuration = builder.Configuration;
 
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddHttpContextAccessor();
+
             // Sets up default HTTP client
             // Also allows communication with Identity Server
             builder.Services.AddHttpClient(configuration[Settings.ServerAPIClientName], client =>
             {
                 client.BaseAddress = new Uri(configuration[Settings.ServerAPIBaseUrl]);
+            })
+            .AddHttpMessageHandler(sp =>
+            {
+                var handler = sp.GetService<AuthorizationMessageHandler>()
+                    .ConfigureHandler(
+                        authorizedUrls: new[] { "https://localhost:7013", "https://localhost:5001" },
+                        scopes: new[] { "web-api-scope" });
+                return handler;
             });
-            //.AddHttpMessageHandler(sp =>
-            //{
-            //    var handler = sp.GetService<AuthorizationMessageHandler>()
-            //        .ConfigureHandler(
-            //            authorizedUrls: new[] { "https://localhost:7013" },
-            //            scopes: new[] { "api-scope" });
-            //    return handler;
-            //});
             // Allows CORS with Web API
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(configuration[Settings.ServerAPIClientName]));
             //builder.Services.AddApiAuthorization();
