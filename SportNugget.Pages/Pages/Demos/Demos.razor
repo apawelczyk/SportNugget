@@ -27,4 +27,9 @@
     <h3>Test State: @TestState.TestText</h3>
     <input @bind="TestText"/>
     <button @onclick="OnTestStateChangeButtonClick">Change</button>
+    <hr />
+    <h3>Culture: @CurrentCulture.DisplayName</h3>
+    <p>Test 1: @ContentResourceProvider.GetResource(ContentResource.Test1)</p>
+    <br />
+    <p>Test 2: @ContentResourceProvider.GetResource(ContentResource.Test2)</p>
 </div>

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using SportNugget.Web.Client;
 using SportNugget.Web.Client.Helpers;
+using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -44,10 +45,15 @@ builder.InitializeStateManagement();
 builder.ConfigureAutomapper();
 #endregion
 
-#region
+#region Culture
+// Override default browser language
+//CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-US");
+//CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("es-US");
+builder.InitializeLocalization();
 #endregion
 
-#region
+#region Storage
+builder.InitializeStorage();
 #endregion
 
 await builder.Build().RunAsync();

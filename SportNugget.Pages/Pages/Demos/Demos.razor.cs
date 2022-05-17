@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.Extensions.Localization;
+using SportNugget.Localization.Interfaces;
 using SportNugget.Logging.Interfaces;
 using SportNugget.Pages.Shared;
 using SportNugget.Shared.Services.Interfaces;
 using SportNugget.Shared.State.Demos.Interfaces;
 using SportNugget.Shared.ViewModelBuilders.Interfaces;
 using SportNugget.ViewModels.Demos;
+using System.Globalization;
 
 namespace SportNugget.Pages.Pages.Demos
 {
@@ -22,6 +25,8 @@ namespace SportNugget.Pages.Pages.Demos
         public ITestState TestState { get; set; }
         [Inject]
         public IAccessTokenProvider TokenProvider { get; set; }
+        [Inject]
+        public IContentResourceProvider ContentResourceProvider { get; set; }
         #endregion
 
         #region Parameters
@@ -31,6 +36,7 @@ namespace SportNugget.Pages.Pages.Demos
         public string TestText { get; set; }
         public List<TestViewModel> TestData { get; set; } = new List<TestViewModel>();
         public bool IsLoading { get; set; } = true;
+        public CultureInfo CurrentCulture { get; set; } = CultureInfo.CurrentCulture;
         #endregion
 
         #region Lifecycles

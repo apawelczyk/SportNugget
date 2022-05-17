@@ -24,6 +24,11 @@ using SportNugget.Shared.State.Auth;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
+using Microsoft.Extensions.Localization;
+using Blazored.LocalStorage;
+using SportNugget.Localization.Interfaces;
+using SportNugget.Localization;
 
 namespace SportNugget.Web.Client.Helpers
 {
@@ -123,6 +128,17 @@ namespace SportNugget.Web.Client.Helpers
         public static void InitializeStateManagement(this WebAssemblyHostBuilder builder)
         {
             //builder.Services.AddSingleton<IAuthState, AuthState>();
+        }
+
+        public static void InitializeLocalization(this WebAssemblyHostBuilder builder)
+        {
+            builder.Services.AddLocalization();
+            builder.Services.AddTransient<IContentResourceProvider, ContentResourceProvider>();
+        }
+
+        public static void InitializeStorage(this WebAssemblyHostBuilder builder)
+        {
+            builder.Services.AddBlazoredLocalStorage();
         }
 
         public static void ConfigureAutomapper(this WebAssemblyHostBuilder builder)
