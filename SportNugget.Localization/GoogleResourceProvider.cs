@@ -3,6 +3,7 @@ using Microsoft.Extensions.Localization;
 using SportNugget.Localization.Interfaces;
 using SportNugget.Localization.Resources;
 using SportNugget.Logging.Interfaces;
+using System.Globalization;
 
 namespace SportNugget.Localization
 {
@@ -11,7 +12,7 @@ namespace SportNugget.Localization
         private readonly IStringLocalizer<SportNugget.Localization.Resources.ContentResources> _localizer;
         private readonly ILogger _logger;
 
-        public string GetResource(string key, string culture = "en-US")
+        public string GetResource(string key)
         {
             try
             {
@@ -22,7 +23,7 @@ namespace SportNugget.Localization
                     TranslateTextRequest request = new TranslateTextRequest
                     {
                         Contents = { value },
-                        TargetLanguageCode = culture
+                        TargetLanguageCode = CultureInfo.CurrentCulture.Name
                     };
                     TranslateTextResponse response = client.TranslateText(request);
                     Translation translation = response.Translations[0];

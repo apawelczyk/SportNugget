@@ -2,6 +2,7 @@
 using SportNugget.Localization.Interfaces;
 using SportNugget.Localization.Resources;
 using SportNugget.Logging.Interfaces;
+using System.Globalization;
 
 namespace SportNugget.Localization
 {

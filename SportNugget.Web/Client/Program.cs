@@ -47,8 +47,8 @@ builder.ConfigureAutomapper();
 
 #region Culture
 // Override default browser language
-//CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-US");
-//CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("es-US");
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-US");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("es-US");
 builder.InitializeLocalization();
 #endregion
 
