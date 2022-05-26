@@ -36,6 +36,7 @@ namespace SportNugget.Web.Client.Helpers
     {
         public static void InitializeRegistrations(this WebAssemblyHostBuilder builder)
         {
+            // TODO: Find other package or fix this to auto register same name interface/classes
             builder.Services.Scan(o =>
             {
                 o.FromCallingAssembly().AddClasses().AsMatchingInterface();
@@ -43,9 +44,10 @@ namespace SportNugget.Web.Client.Helpers
             builder.Services.AddTransient<IDataAccessManager, DataAccessManager>();
             builder.Services.AddTransient<Logging.Interfaces.ILogger, SportNugget.Logging.Logger>();
             builder.Services.AddTransient<ITestService, TestService>();
+            builder.Services.AddTransient<ISessionStateService, SessionStateService>();
             builder.Services.AddTransient<ITestViewModelBuilder, TestViewModelBuilder>();
-            builder.Services.AddSingleton<ITestState, TestState>();
-            builder.Services.AddSingleton<IAuthState, AuthState>();
+            builder.Services.AddScoped<ITestState, TestState>();
+            builder.Services.AddScoped<IAuthState, AuthState>();
         }
 
         public static void InitializeRadzen(this WebAssemblyHostBuilder builder)

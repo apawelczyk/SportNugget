@@ -17,7 +17,7 @@ namespace SportNugget.Localization
             _logger = logger;
         }
 
-        public string GetResource(string key, string culture = "en-US")
+        public string GetResource(string key)
         {
             try
             {

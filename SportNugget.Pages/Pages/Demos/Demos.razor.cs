@@ -82,7 +82,7 @@ namespace SportNugget.Pages.Pages.Demos
         #region Events
         public void OnTestStateChangeButtonClick()
         {
-            TestState.TestText = TestText;
+            TestState.ProtectedTestText = TestText;
             StateHasChanged();
         }
         #endregion
