@@ -40,6 +40,10 @@ builder.Services.ConfigureSwagger();
 builder.ConfigureLogging();
 #endregion
 
+#region Caching
+builder.ConfigureCaching();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

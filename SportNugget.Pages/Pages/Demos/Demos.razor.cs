@@ -53,7 +53,7 @@ namespace SportNugget.Pages.Pages.Demos
                 }
 
                 Logger.LogInfo("Demos.razor.cs OnInitializedAsync!" + $" Token: {bearerToken}");
-                TestText = TestState.TestText;
+                TestText = await TestState.GetProtectedTestText();
 
                 var testDataTask = LoadTestData();
 
@@ -82,7 +82,8 @@ namespace SportNugget.Pages.Pages.Demos
         #region Events
         public void OnTestStateChangeButtonClick()
         {
-            TestState.ProtectedTestText = TestText;
+            TestState.SetProtectedTestText(TestText);
+            //TestState.ProtectedTestText = TestText;
             StateHasChanged();
         }
         #endregion

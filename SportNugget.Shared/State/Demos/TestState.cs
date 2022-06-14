@@ -19,7 +19,7 @@ namespace SportNugget.Shared.State.Demos
             _sessionStateService = sessionStateService;
         }
 
-        private string? testText;
+        private string? _protectedTestText;
 
         public string TestText
         {
@@ -49,20 +49,11 @@ namespace SportNugget.Shared.State.Demos
         {
             get
             {
-                var result = _sessionStateService.GetSessionStateData<string>("TestState.ProtectedTestText");
-                return result;
+                return _protectedTestText;
             }
             set
             {
-                try
-                {
-                    _sessionStateService.SetSessionStateData<string>("TestState.TestText", value);
-                    NotifyStateChanged();
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error setting ProtectedTestText.");
-                }
+
             }
         }
 
@@ -71,6 +62,36 @@ namespace SportNugget.Shared.State.Demos
         public void NotifyStateChanged()
         {
             OnChange?.Invoke();
+        }
+
+        public async Task SetProtectedTestText(string text)
+        {
+            try
+            {
+                await _sessionStateService.SetSessionStateData<string>("TestState.ProtectedTestText", text);
+                _protectedTestText = text;
+                NotifyStateChanged();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error setting ProtectedTestText.");
+            }
+        }
+
+        public async Task<string> GetProtectedTestText()
+        {
+            try
+            {
+                var result = await _sessionStateService.GetSessionStateData<string>("TestState.ProtectedTestText");
+                _protectedTestText = result;
+                NotifyStateChanged();
+                return result;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error setting ProtectedTestText.");
+                return string.Empty;
+            }
         }
     }
 }

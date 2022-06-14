@@ -2,7 +2,7 @@
 {
     public interface ISessionStateService
     {
-        T GetSessionStateData<T>(string key);
-        void SetSessionStateData<T>(string key, T input);
+        Task<T> GetSessionStateData<T>(string key);
+        Task SetSessionStateData<T>(string key, T input);
     }
 }

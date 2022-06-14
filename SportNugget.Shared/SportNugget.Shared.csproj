@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SportNugget.BusinessModels\SportNugget.BusinessModels.csproj" />
+    <ProjectReference Include="..\SportNugget.Caching\SportNugget.Caching.csproj" />
     <ProjectReference Include="..\SportNugget.Common\SportNugget.Common.csproj" />
     <ProjectReference Include="..\SportNugget.ViewModels\SportNugget.ViewModels.csproj" />
   </ItemGroup>

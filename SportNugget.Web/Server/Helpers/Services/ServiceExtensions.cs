@@ -20,6 +20,9 @@ using SportNugget.Web.Server.Utility.Interfaces;
 using SportNugget.Web.Server.Utility.API;
 using Serilog;
 using System.Text;
+using SportNugget.Caching.Interfaces;
+using SportNugget.Caching;
+using StackExchange.Redis;
 
 namespace SportNugget.Web.Server.Helpers.Services
 {
@@ -126,6 +129,32 @@ namespace SportNugget.Web.Server.Helpers.Services
             builder.Host.UseSerilog((ctx, lc) => lc
                 .WriteTo.Console());
                 //.WriteTo.EventCollector("http://localhost:8088/services/collector", "e4829192-bd42-41b9-baa5-f3f111f54d33")); // Sends logs to Splunk);
+        }
+
+
+        public static void ConfigureCaching(this WebApplicationBuilder builder)
+        {
+            var configuration = builder.Configuration;
+
+            var redisOptions = new ConfigurationOptions()
+            {
+                KeepAlive = 0,
+                AllowAdmin = true,
+                EndPoints = { { "127.0.0.1", 5002 } },
+                ConnectTimeout = 5000,
+                ConnectRetry = 5,
+                SyncTimeout = 5000,
+                AbortOnConnectFail = false,
+            };
+
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "http://localhost:5002"; //configuration[Settings.RedisConnectionString];
+                options.InstanceName = "SportNugget-Web_";
+                options.ConfigurationOptions = redisOptions;
+            });
+
+            builder.Services.AddTransient<ICacheManager, DistributedCacheManager>();
         }
     }
 }

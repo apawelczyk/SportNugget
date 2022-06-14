@@ -78,5 +78,39 @@ namespace SportNugget.Common.API
                 return default(T);
             }
         }
+
+        public T PostBlah<T>(string apiRoute, T postObject, string bearerToken = null)
+        {
+            try
+            {
+                var client = _httpClientFactory.CreateClient(_restClientConfig.ClientName);
+                if (!string.IsNullOrWhiteSpace(bearerToken))
+                {
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
+                }
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, IncludeFields = true };
+
+                var response = client.PostAsJsonAsync<T>(apiRoute, postObject).Result;
+                if (response?.IsSuccessStatusCode ?? false)
+                {
+                    var responseContent = response?.Content?.ReadAsStringAsync().Result;
+                    if (!string.IsNullOrWhiteSpace(responseContent))
+                    {
+                        var deserializedResult = JsonConvert.DeserializeObject<T>(responseContent);
+                        if (deserializedResult != null)
+                        {
+                            return deserializedResult;
+                        }
+                    }
+                }
+
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error with POST.");
+                return default(T);
+            }
+        }
     }
 }

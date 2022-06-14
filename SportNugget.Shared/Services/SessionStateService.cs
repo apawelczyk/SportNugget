@@ -1,11 +1,11 @@
 ﻿using SportNugget.Common.API;
 using SportNugget.Common.API.Interfaces;
+using SportNugget.Common.Formatters;
 using SportNugget.Logging.Interfaces;
 using SportNugget.Shared.Services.Interfaces;
 
 namespace SportNugget.Shared.Services
 {
-    // TODO: Decide to save to Redis or call Web API and save to Cosmos
     public class SessionStateService : ISessionStateService
     {
         private readonly IDataAccessManager _dataAccessManager;
@@ -17,15 +17,40 @@ namespace SportNugget.Shared.Services
             _logger = logger;
         }
 
-        public T GetSessionStateData<T>(string key)
+        public async Task<T> GetSessionStateData<T>(string key)
         {
-            var tests = _dataAccessManager.Get<ResponseWrapper<T>>($"api/SessionStateData/{key}").Result;
-            return tests.Data;
+            try
+            {
+                var result = await _dataAccessManager.Get<string>($"api/SessionState/{key}");
+                if(typeof(T) == typeof(string))
+                {
+                    return (T)Convert.ChangeType(result, typeof(T)); ;
+                }
+                if(result != null)
+                {
+                    var convertedData = StringConverter.Convert<T>(result);
+                    return convertedData;
+                }
+                return default(T);
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e, "Error getting session data from API.");
+                return default(T);
+            }
         }
 
-        public void SetSessionStateData<T>(string key, T input)
+        public async Task SetSessionStateData<T>(string key, T input)
         {
-            var result = _dataAccessManager.Post<T>($"api/SessionStateData/{key}", input).Result;
+            try
+            {
+                var result = await _dataAccessManager.Post<object>($"api/SessionState/{key}", input);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error setting session data from API.");
+            }
         }
     }
 }
